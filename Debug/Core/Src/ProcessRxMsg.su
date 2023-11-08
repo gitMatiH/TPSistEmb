@@ -1,0 +1,2 @@
+../Core/Src/ProcessRxMsg.c:6:6:ProcessRxMsg	48	static
+../Core/Src/ProcessRxMsg.c:117:6:enviarACola	56	dynamic

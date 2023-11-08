@@ -1,0 +1,7 @@
+../Core/Src/cola.c:62:6:Cola_InicializarCola	24	static
+../Core/Src/cola.c:77:6:Cola_LimpiarCola	16	static
+../Core/Src/cola.c:90:19:Cola_CantidadEnCola	16	static
+../Core/Src/cola.c:106:21:Cola_AgregarDatoCola	16	static
+../Core/Src/cola.c:138:21:Cola_RetirarDatoCola	16	static
+../Core/Src/cola.c:169:21:Cola_RetirarDatoCola_Multi	32	static
+../Core/Src/cola.c:204:21:Cola_AgregarDatoCola_Multi	32	static
