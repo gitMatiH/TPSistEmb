@@ -5,7 +5,10 @@
  *      Author: Matias
  */
 #include "main.h"
-#include "cola.h"
+
+
+#ifndef PROCESS_RX_MSG_H_
+#define PROCESS_RX_MSG_H_
 
 
 #define MSG_ERROR "Error\n"
@@ -23,3 +26,5 @@ extern enum{
 extern void ProcessRxMsg(UART_HandleTypeDef *, uint8_t *, Cola_BaseStructTypedef *, Cola_BaseStructTypedef *, uint8_t *instruccion);
 
 extern void enviarACola(char*, Cola_BaseStructTypedef*);
+
+#endif

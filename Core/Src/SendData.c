@@ -6,9 +6,6 @@
  */
 
 #include "main.h"
-#include "cola.h"
-#include "SendData.h"
-
 
 
 void SendData(UART_HandleTypeDef * huart, Cola_BaseStructTypedef * colaTx){

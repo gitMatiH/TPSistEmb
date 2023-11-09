@@ -43,7 +43,6 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 				if (dato == 0x0D) {
 					//a tiempo
 					if(tiempoRecepcionActual - tiempoRecepcion0 < TMAX){
-						tiempoRecepcion1 = tiempoRecepcionActual;
 						estadoActual = CARACTER_VALIDO_2;
 					//tarde
 					}else{
@@ -74,7 +73,6 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 				if (dato == 0x0A){
 					//a tiempo
 					if(tiempoRecepcionActual - tiempoRecepcion0 < TMAX){
-						tiempoRecepcion1 = tiempoRecepcionActual;
 						enviarACola(MSG_OK,colaTx);
 						*instruccion_ack = instruccion;
 						estadoActual = OCIOSO;

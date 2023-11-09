@@ -56,7 +56,12 @@ TColaDato_Typedef buffer_tx[MAX_BUFFER];
 Cola_BaseStructTypedef cola_tx;
 
 
+uint32_t milisegundosDebounce = 0;
+uint32_t milisegundosActuales = 0;
 
+
+
+uint16_t pulseCount = 0;
 
 /* USER CODE BEGIN PV */
 
@@ -66,6 +71,7 @@ Cola_BaseStructTypedef cola_tx;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
+void PulseCountBuff_init(int PulseCountBuff[100]);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -82,7 +88,7 @@ static void MX_USART1_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	uint16_t contador = 0;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -100,6 +106,8 @@ int main(void)
   /* USER CODE BEGIN SysInit */
   Cola_InicializarCola(&cola_rx, buffer_rx, MAX_BUFFER);
   Cola_InicializarCola(&cola_tx, buffer_tx, MAX_BUFFER);
+
+
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -123,7 +131,7 @@ int main(void)
 
 	  SendData(&huart1, &cola_tx);
 
-
+	  CountingHandler(&pulseCount, &contador, &huart1, &cola_tx);
 
 
     /* USER CODE END WHILE */
@@ -276,15 +284,21 @@ void assert_failed(uint8_t *file, uint32_t line)
 
 
 /**
-  * @brief  Tx Transfer completed callbacks.
-  * @param  huart  Pointer to a UART_HandleTypeDef structure that contains
-  *                the configuration information for the specified UART module.
+  * @brief  EXTI line detection callbacks.
+  * @param  GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
   */
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+//todo buffer de entrada
 {
-
+  milisegundosActuales = HAL_GetTick();
+  if (GPIO_Pin == GPIO_PIN_1 && (milisegundosActuales - milisegundosDebounce > 200))
+  {
+	pulseCount = pulseCount +1;
+    milisegundosDebounce = milisegundosActuales;
+  }
 }
+
 
 /**
   * @brief  Rx Transfer completed callbacks.

@@ -1,3 +1,4 @@
+"./Core/Src/CountingHandler.o"
 "./Core/Src/LedHandler.o"
 "./Core/Src/ProcessRxMsg.o"
 "./Core/Src/SendData.o"

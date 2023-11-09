@@ -6,6 +6,9 @@
  */
 #include "main.h"
 
+#ifndef LED_HANDLER_H_
+#define LED_HANDLER_H_
+
 #define LED1 0
 #define LED2 1
 #define LED3 2
@@ -25,3 +28,5 @@ extern void LedHandler();
 extern void LedHandler_Init(led_typedef * , uint8_t);
 
 extern void LedSequence();
+
+#endif

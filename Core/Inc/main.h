@@ -32,10 +32,11 @@ extern "C" {
 #include <stdbool.h>
 #include <string.h>
 
-#include "ProcessRxMsg.h"
 #include "cola.h"
-#include "SendData.h"
+#include "ProcessRxMsg.h"
 #include "LedHandler.h"
+#include "SendData.h"
+#include "CountingHandler.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
