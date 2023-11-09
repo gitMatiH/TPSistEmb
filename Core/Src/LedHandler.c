@@ -6,6 +6,9 @@
  */
 
 #include "main.h"
+#include "LedHandler.h"
+
+
 #define MAX_TIME_MS 125
 /* no lo entendí
 void LedHandler_Init(led_typedef * ledx, uint8_t num_led)

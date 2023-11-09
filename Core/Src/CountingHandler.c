@@ -5,6 +5,7 @@
  *      Author: Matias
  */
 #include "main.h"
+#include "CountingHandler.h"
 
 
 void CountingHandler(uint16_t* pulseCount, uint16_t* contador, UART_HandleTypeDef * huart, Cola_BaseStructTypedef * colaTx){

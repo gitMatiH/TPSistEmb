@@ -1,6 +1,6 @@
 
 #include "main.h"
-
+#include "ProcessRxMsg.h"
 
 
 void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStructTypedef * colaRx, Cola_BaseStructTypedef * colaTx, uint8_t *instruccion_ack, int* pEstadoActual){

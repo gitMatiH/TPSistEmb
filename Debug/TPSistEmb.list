@@ -37,15 +37,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_rnglists 00000590  00000000  00000000  00029560  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00017654  00000000  00000000  00029af0  2**0
+ 17 .debug_macro  00017664  00000000  00000000  00029af0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0000a654  00000000  00000000  00041144  2**0
+ 18 .debug_line   0000a655  00000000  00000000  00041154  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    00081868  00000000  00000000  0004b798  2**0
+ 19 .debug_str    00081868  00000000  00000000  0004b7a9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  00001bac  00000000  00000000  000cd000  2**2
+ 20 .debug_frame  00001bac  00000000  00000000  000cd014  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000004c  00000000  00000000  000cebac  2**0
+ 21 .debug_line_str 0000004c  00000000  00000000  000cebc0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -88,9 +88,9 @@ Disassembly of section .text:
  800015a:	4770      	bx	lr
 
 0800015c <CountingHandler>:
- *      Author: Matias
  */
 #include "main.h"
+#include "CountingHandler.h"
 
 
 void CountingHandler(uint16_t* pulseCount, uint16_t* contador, UART_HandleTypeDef * huart, Cola_BaseStructTypedef * colaTx){
@@ -503,7 +503,7 @@ void LedSequence(int * pEstadoLeds, bool* primeraVez){
 0800041c <ProcessRxMsg>:
 
 #include "main.h"
-
+#include "ProcessRxMsg.h"
 
 
 void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStructTypedef * colaRx, Cola_BaseStructTypedef * colaTx, uint8_t *instruccion_ack, int* pEstadoActual){
@@ -856,9 +856,9 @@ void enviarACola(char* cadena, Cola_BaseStructTypedef*colaTx){
  800067a:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
 
 0800067e <SendData>:
- */
 
 #include "main.h"
+#include "SendData.h"
 
 
 void SendData(UART_HandleTypeDef * huart, Cola_BaseStructTypedef * colaTx){

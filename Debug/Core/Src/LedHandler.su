@@ -1,2 +1,2 @@
-../Core/Src/LedHandler.c:19:6:LedHandler	24	static
-../Core/Src/LedHandler.c:62:6:LedSequence	24	static
+../Core/Src/LedHandler.c:22:6:LedHandler	24	static
+../Core/Src/LedHandler.c:65:6:LedSequence	24	static
