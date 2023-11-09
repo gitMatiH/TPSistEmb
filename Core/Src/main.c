@@ -59,7 +59,10 @@ Cola_BaseStructTypedef cola_tx;
 uint32_t milisegundosDebounce = 0;
 uint32_t milisegundosActuales = 0;
 
-
+int estadoActual = 0;
+int estadoLeds = 0;
+uint32_t seed;
+bool primeraVez;
 
 uint16_t pulseCount = 0;
 
@@ -122,11 +125,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  ProcessRxMsg(&huart1, &rx_data, &cola_rx, &cola_tx, &instruccion_ack);
+	  ProcessRxMsg(&huart1, &rx_data, &cola_rx, &cola_tx, &instruccion_ack, &estadoActual);
 
-	  LedHandler();
+	  LedHandler(&instruccion_ack, &flagSecuencia, &primeraVez);	//hace falta pasarle & a una bandera global?
 	  if (flagSecuencia == 1){
-		  LedSequence();
+		  LedSequence(&estadoLeds, &primeraVez);
 	  }
 
 	  SendData(&huart1, &cola_tx);

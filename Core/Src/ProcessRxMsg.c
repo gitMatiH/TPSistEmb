@@ -3,9 +3,9 @@
 
 
 
-void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStructTypedef * colaRx, Cola_BaseStructTypedef * colaTx, uint8_t *instruccion_ack){
+void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStructTypedef * colaRx, Cola_BaseStructTypedef * colaTx, uint8_t *instruccion_ack, int* pEstadoActual){
 
-	int estadoActual = 0;
+	int estadoActual = *pEstadoActual;
 	uint8_t instruccion;
 	uint8_t dato;
 	uint32_t tiempoRecepcionActual, tiempoRecepcion0, tiempoRecepcion1, tiempoRecepcion2;

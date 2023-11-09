@@ -23,7 +23,7 @@ extern enum{
 	CARACTER_VALIDO_2 = 2,
 }enum_proceso;
 
-extern void ProcessRxMsg(UART_HandleTypeDef *, uint8_t *, Cola_BaseStructTypedef *, Cola_BaseStructTypedef *, uint8_t *instruccion);
+extern void ProcessRxMsg(UART_HandleTypeDef *, uint8_t *, Cola_BaseStructTypedef *, Cola_BaseStructTypedef *, uint8_t *instruccion, int * estadoActual);
 
 extern void enviarACola(char*, Cola_BaseStructTypedef*);
 
