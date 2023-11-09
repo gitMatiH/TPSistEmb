@@ -26,16 +26,19 @@ void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez)
 	case (cmd_led1):
 		//cambiar estado led 1
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_13);
+	    *instruccion_ack = 0;
 		break;
 
 	case (cmd_led2):
 		//cambiar estado led 2
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
+		*instruccion_ack = 0;
 		break;
 
 	case (cmd_led3):
 		//cambiar estado led 3
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_15);
+		*instruccion_ack = 0;
 		break;
 
 	case (cmd_Secuencia):
@@ -46,6 +49,7 @@ void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez)
 			*primeraVez = 0;//ESTE ES IMPORTANTE, PARA CUANDO RETORNE LA SECUENCIA SEGUN FLAG
 			*flagSecuencia = 0;
 		}
+		*instruccion_ack = 0;
 		break;
 
 	case (cmd_Apagado):
@@ -54,6 +58,7 @@ void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez)
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
+		*instruccion_ack = 0;
 		break;
 
 
