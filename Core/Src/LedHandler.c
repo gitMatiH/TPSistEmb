@@ -24,17 +24,17 @@ void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez)
 	switch(*instruccion_ack){
 
 	case (cmd_led1):
-		//prender led 1
+		//cambiar estado led 1
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_13);
 		break;
 
 	case (cmd_led2):
-		//prender led 2
+		//cambiar estado led 2
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
 		break;
 
 	case (cmd_led3):
-		//prender led 3
+		//cambiar estado led 3
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_15);
 		break;
 

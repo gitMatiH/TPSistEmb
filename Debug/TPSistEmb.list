@@ -204,7 +204,7 @@ void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez)
  800024c:	08000275 	.word	0x08000275
 
 	case (cmd_led1):
-		//prender led 1
+		//cambiar estado led 1
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_13);
  8000250:	f44f 5100 	mov.w	r1, #8192	; 0x2000
  8000254:	4820      	ldr	r0, [pc, #128]	; (80002d8 <LedHandler+0x134>)
@@ -213,7 +213,7 @@ void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez)
  800025a:	e039      	b.n	80002d0 <LedHandler+0x12c>
 
 	case (cmd_led2):
-		//prender led 2
+		//cambiar estado led 2
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
  800025c:	f44f 4180 	mov.w	r1, #16384	; 0x4000
  8000260:	481d      	ldr	r0, [pc, #116]	; (80002d8 <LedHandler+0x134>)
@@ -222,7 +222,7 @@ void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez)
  8000266:	e033      	b.n	80002d0 <LedHandler+0x12c>
 
 	case (cmd_led3):
-		//prender led 3
+		//cambiar estado led 3
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_15);
  8000268:	f44f 4100 	mov.w	r1, #32768	; 0x8000
  800026c:	481a      	ldr	r0, [pc, #104]	; (80002d8 <LedHandler+0x134>)
@@ -774,7 +774,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 
 080005e0 <enviarACola>:
 
-void enviarACola(char* cadena, Cola_BaseStructTypedef*colaTx){
+void enviarACola(char* cadena, Cola_BaseStructTypedef* colaTx){
  80005e0:	e92d 43f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, lr}
  80005e4:	b087      	sub	sp, #28
  80005e6:	af00      	add	r7, sp, #0

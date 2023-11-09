@@ -102,7 +102,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 
 }
 
-void enviarACola(char* cadena, Cola_BaseStructTypedef*colaTx){
+void enviarACola(char* cadena, Cola_BaseStructTypedef* colaTx){
 //encapsular en enviarACola(MSG_ERROR,cola_tx);
 //tal vez que sea bloqueante (que no lo pueda interrumpir otro proceso de llenado de cola)
 	int i;
