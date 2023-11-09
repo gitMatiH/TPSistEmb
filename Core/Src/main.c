@@ -59,10 +59,9 @@ Cola_BaseStructTypedef cola_tx;
 uint32_t milisegundosDebounce = 0;
 uint32_t milisegundosActuales = 0;
 
-int estadoActual = 0;
-int estadoLeds = 0;
-uint32_t seed;
-bool primeraVez;
+int estadoActual = OCIOSO;
+int estadoLeds;
+bool primeraVez = 1;
 
 uint16_t pulseCount = 0;
 

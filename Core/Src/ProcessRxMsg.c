@@ -96,18 +96,8 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 				}
 			}
 
-
-			//devolver (por referencia) 1, 2, 3 S o O.
-
-			// hacer cosas de aceptor de string
-			//
-			//O sea tenemos que pasarle el 1.2,3 al led handler
-			// si es 1, togglear la flag del led 1 (leer recomendaciones de ariel)
-			// si es 2, idem
-			// 3 idem
-			// si es S, levantar la flag del proceso led
-			// si es O, apagar todo
-
+			*pEstadoActual = estadoActual;
+			//devuelve (por referencia) 1, 2, 3 S o O.
 	}
 
 }

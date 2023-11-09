@@ -43,7 +43,7 @@ void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez)
 			*primeraVez = 1;
 			*flagSecuencia = 1;
 		}else{
-			*primeraVez = 0;
+			*primeraVez = 0;//ESTE ES IMPORTANTE, PARA CUANDO RETORNE LA SECUENCIA SEGUN FLAG
 			*flagSecuencia = 0;
 		}
 		break;
@@ -106,7 +106,6 @@ void LedSequence(int * pEstadoLeds, bool* primeraVez){
 		break;
 
 	case APAGADO_LEDS:
-
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
