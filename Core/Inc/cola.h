@@ -18,14 +18,12 @@
 #ifndef COLA_CIRCULAR_H_
 #define COLA_CIRCULAR_H_
 /*== Include ===========================================================================*/
-//#define CORTEX_M0
-#ifdef CORTEX_M0 //Hicimos cambios acá
-	#include "stm32f0xx_hal.h"
 
-#else
+#define CORTEX_M3
+#ifdef CORTEX_M3
 	#include "stm32f1xx_hal.h"
-	#define CORTEX_M4
 #endif
+
 
 
 /**	\addtogroup Cola

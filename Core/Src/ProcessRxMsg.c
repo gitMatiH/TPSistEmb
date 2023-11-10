@@ -1,11 +1,38 @@
 
-#include "main.h"
 #include "ProcessRxMsg.h"
 
+typedef enum{
+	OCIOSO = 0,
+	CARACTER_VALIDO_1 = 1,
+	CARACTER_VALIDO_2 = 2,
+}enum_proceso;
 
-void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStructTypedef * colaRx, Cola_BaseStructTypedef * colaTx, uint8_t *instruccion_ack, int* pEstadoActual){
+//alternativa a static
+enum_proceso estadoActual;
+uint8_t flag;
 
-	int estadoActual = *pEstadoActual;
+void SetFlag(uint8_t value)
+{
+	flag = value;
+}
+
+uint8_t GetFlag(void)
+{
+	return flag;
+}
+
+TColaDato_Typedef buffer_rx[RX_COLA_MAX_BUFFER];
+Cola_BaseStructTypedef cola_rx;
+
+void ProcessRxMsg_Init(void){
+	estadoActual = OCIOSO;
+	Cola_InicializarCola(&cola_rx, buffer_rx, RX_COLA_MAX_BUFFER);
+
+}
+
+
+void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStructTypedef * colaTx, uint8_t *instruccion_ack){
+
 	uint8_t instruccion;
 	uint8_t dato;
 	uint32_t tiempoRecepcionActual, tiempoRecepcion0, tiempoRecepcion1, tiempoRecepcion2;
@@ -20,7 +47,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 	switch(estadoActual){
 		case OCIOSO:
 
-				if (Cola_RetirarDatoCola (colaRx,&dato) != 0x00){
+				if (Cola_RetirarDatoCola (&cola_rx,&dato) != 0x00){
 					//dato esperado
 					if (dato == 1 || dato == 2 || dato == 3 || dato == 'S' || dato == 'O'){
 						tiempoRecepcion0 = HAL_GetTick();
@@ -36,7 +63,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 
 		case CARACTER_VALIDO_1:
 
-			if (Cola_RetirarDatoCola (colaRx,&dato) != 0x00){
+			if (Cola_RetirarDatoCola (&cola_rx,&dato) != 0x00){
 
 				//dato esperado
 				tiempoRecepcionActual = HAL_GetTick();
@@ -67,7 +94,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 
 		case CARACTER_VALIDO_2:
 
-			if (Cola_RetirarDatoCola (colaRx, &dato) != 0x00){
+			if (Cola_RetirarDatoCola (&cola_rx, &dato) != 0x00){
 				tiempoRecepcionActual = HAL_GetTick();
 				//dato esperado
 				if (dato == 0x0A){
@@ -96,11 +123,14 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 				}
 			}
 
-			*pEstadoActual = estadoActual;
 			//devuelve (por referencia) 1, 2, 3 S o O.
 	}
 
 }
+
+//pasar esta funcion a send data, poner aca el include senddata.c
+//poner en senddata la cola de tx y el buffer (perteneciente a la cola)
+
 
 void enviarACola(char* cadena, Cola_BaseStructTypedef* colaTx){
 //encapsular en enviarACola(MSG_ERROR,cola_tx);

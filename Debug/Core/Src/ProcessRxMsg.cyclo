@@ -1,2 +1,3 @@
-../Core/Src/ProcessRxMsg.c:6:6:ProcessRxMsg	27
-../Core/Src/ProcessRxMsg.c:105:6:enviarACola	2
+../Core/Src/ProcessRxMsg.c:16:6:ProcessRxMsg_Init	1
+../Core/Src/ProcessRxMsg.c:23:6:ProcessRxMsg	27
+../Core/Src/ProcessRxMsg.c:120:6:enviarACola	2

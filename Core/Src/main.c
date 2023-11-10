@@ -49,8 +49,6 @@ uint8_t instruccion_ack = 0;
 bool flagSecuencia = 0;
 
 
-TColaDato_Typedef buffer_rx[MAX_BUFFER];
-Cola_BaseStructTypedef cola_rx;
 
 TColaDato_Typedef buffer_tx[MAX_BUFFER];
 Cola_BaseStructTypedef cola_tx;
@@ -59,7 +57,6 @@ Cola_BaseStructTypedef cola_tx;
 uint32_t milisegundosDebounce = 0;
 uint32_t milisegundosActuales = 0;
 
-int estadoActual = OCIOSO;
 int estadoLeds;
 bool primeraVez = 1;
 
@@ -106,7 +103,6 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-  Cola_InicializarCola(&cola_rx, buffer_rx, MAX_BUFFER);
   Cola_InicializarCola(&cola_tx, buffer_tx, MAX_BUFFER);
 
 
@@ -116,15 +112,17 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  ProcessRxMsg_Init();
   HAL_UART_Receive_IT(&huart1, &rx_data, 1);
   HAL_UART_Transmit(&huart1, (uint8_t *)MENSAJE_BIENVENIDA, strlen(MENSAJE_BIENVENIDA), 1000);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  ProcessRxMsg(&huart1, &rx_data, &cola_rx, &cola_tx, &instruccion_ack, &estadoActual);
+	  ProcessRxMsg(&huart1, &rx_data, &cola_tx, &instruccion_ack);
 
 	  LedHandler(&instruccion_ack, &flagSecuencia, &primeraVez);	//hace falta pasarle & a una bandera global?
 	  if (flagSecuencia == 1){

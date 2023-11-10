@@ -5,7 +5,7 @@
  *      Author: Matias
  */
 
-#include "main.h"
+//#include "main.h"
 #include "LedHandler.h"
 
 
@@ -20,31 +20,37 @@ void LedHandler_Init(led_typedef * ledx, uint8_t num_led)
 */
 
 void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez){
+	if(GetFlag()==0)
 
+	//if (*instruccion_ack == 0)
+	{
+		return;
+	}
 	switch(*instruccion_ack){
 
-	case (cmd_led1):
+	case cmd_led1:
 		//cambiar estado led 1
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_13);
 	    *instruccion_ack = 0;
 		break;
 
-	case (cmd_led2):
+	case cmd_led2:
 		//cambiar estado led 2
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
 		*instruccion_ack = 0;
 		break;
 
-	case (cmd_led3):
+	case cmd_led3:
 		//cambiar estado led 3
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_15);
 		*instruccion_ack = 0;
 		break;
 
-	case (cmd_Secuencia):
+	case cmd_Secuencia:
 		if (*flagSecuencia == 0){
 			*primeraVez = 1;
 			*flagSecuencia = 1;
+			//puedo usar ese para leer el tiempo inicial "seed
 		}else{
 			*primeraVez = 0;//ESTE ES IMPORTANTE, PARA CUANDO RETORNE LA SECUENCIA SEGUN FLAG
 			*flagSecuencia = 0;
@@ -52,7 +58,7 @@ void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez)
 		*instruccion_ack = 0;
 		break;
 
-	case (cmd_Apagado):
+	case cmd_Apagado:
 		*primeraVez = 0;
 		*flagSecuencia = 0;//??
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
@@ -61,6 +67,10 @@ void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez)
 		*instruccion_ack = 0;
 		break;
 
+	default:
+		// apagar todos los leds
+		*instruccion_ack = 0
+		break;
 
 	}
 
