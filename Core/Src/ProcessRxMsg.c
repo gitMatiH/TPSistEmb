@@ -8,7 +8,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 	int estadoActual = *pEstadoActual;
 	uint8_t instruccion;
 	uint8_t dato;
-	uint32_t tiempoRecepcionActual, tiempoRecepcion0, tiempoRecepcion1, tiempoRecepcion2;
+	/*static*/ uint32_t tiempoRecepcionActual, tiempoRecepcion0;
 
 
 
@@ -85,7 +85,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 				//dato no esperado pero valido para secuencia
 				}else if(dato == 1 || dato == 2 || dato == 3 || dato == 'S' || dato == 'O'){
 					enviarACola(MSG_ERROR,colaTx);
-					tiempoRecepcion1 = HAL_GetTick();
+					tiempoRecepcion0 = HAL_GetTick();
 					instruccion = 0;
 					estadoActual = CARACTER_VALIDO_1;
 				//dato no esperado inválido

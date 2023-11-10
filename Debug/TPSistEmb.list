@@ -29,23 +29,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  12 .comment      00000043  00000000  00000000  00020039  2**0
                   CONTENTS, READONLY
- 13 .debug_info   000071e1  00000000  00000000  0002007c  2**0
+ 13 .debug_info   000071c7  00000000  00000000  0002007c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00001bb0  00000000  00000000  0002725d  2**0
+ 14 .debug_abbrev 00001ba1  00000000  00000000  00027243  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00000768  00000000  00000000  00028e10  2**3
+ 15 .debug_aranges 00000768  00000000  00000000  00028de8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00000590  00000000  00000000  00029578  2**0
+ 16 .debug_rnglists 00000590  00000000  00000000  00029550  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00017664  00000000  00000000  00029b08  2**0
+ 17 .debug_macro  00017664  00000000  00000000  00029ae0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0000a65a  00000000  00000000  0004116c  2**0
+ 18 .debug_line   0000a65a  00000000  00000000  00041144  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    0008186d  00000000  00000000  0004b7c6  2**0
+ 19 .debug_str    0008184b  00000000  00000000  0004b79e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  00001bac  00000000  00000000  000cd034  2**2
+ 20 .debug_frame  00001bac  00000000  00000000  000ccfec  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000004c  00000000  00000000  000cebe0  2**0
+ 21 .debug_line_str 0000004c  00000000  00000000  000ceb98  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -562,7 +562,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 }
  800046a:	e0bf      	b.n	80005ec <ProcessRxMsg+0x1b0>
 				if (Cola_RetirarDatoCola (colaRx,&dato) != 0x00){
- 800046c:	f107 0313 	add.w	r3, r7, #19
+ 800046c:	f107 0317 	add.w	r3, r7, #23
  8000470:	4619      	mov	r1, r3
  8000472:	6878      	ldr	r0, [r7, #4]
  8000474:	f000 f97e 	bl	8000774 <Cola_RetirarDatoCola>
@@ -570,26 +570,26 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
  800047a:	2b00      	cmp	r3, #0
  800047c:	f000 80b3 	beq.w	80005e6 <ProcessRxMsg+0x1aa>
 					if (dato == 1 || dato == 2 || dato == 3 || dato == 'S' || dato == 'O'){
- 8000480:	7cfb      	ldrb	r3, [r7, #19]
+ 8000480:	7dfb      	ldrb	r3, [r7, #23]
  8000482:	2b01      	cmp	r3, #1
  8000484:	d00b      	beq.n	800049e <ProcessRxMsg+0x62>
- 8000486:	7cfb      	ldrb	r3, [r7, #19]
+ 8000486:	7dfb      	ldrb	r3, [r7, #23]
  8000488:	2b02      	cmp	r3, #2
  800048a:	d008      	beq.n	800049e <ProcessRxMsg+0x62>
- 800048c:	7cfb      	ldrb	r3, [r7, #19]
+ 800048c:	7dfb      	ldrb	r3, [r7, #23]
  800048e:	2b03      	cmp	r3, #3
  8000490:	d005      	beq.n	800049e <ProcessRxMsg+0x62>
- 8000492:	7cfb      	ldrb	r3, [r7, #19]
+ 8000492:	7dfb      	ldrb	r3, [r7, #23]
  8000494:	2b53      	cmp	r3, #83	; 0x53
  8000496:	d002      	beq.n	800049e <ProcessRxMsg+0x62>
- 8000498:	7cfb      	ldrb	r3, [r7, #19]
+ 8000498:	7dfb      	ldrb	r3, [r7, #23]
  800049a:	2b4f      	cmp	r3, #79	; 0x4f
  800049c:	d107      	bne.n	80004ae <ProcessRxMsg+0x72>
 						tiempoRecepcion0 = HAL_GetTick();
  800049e:	f000 fc23 	bl	8000ce8 <HAL_GetTick>
- 80004a2:	6178      	str	r0, [r7, #20]
+ 80004a2:	61b8      	str	r0, [r7, #24]
 						instruccion = dato;
- 80004a4:	7cfb      	ldrb	r3, [r7, #19]
+ 80004a4:	7dfb      	ldrb	r3, [r7, #23]
  80004a6:	77fb      	strb	r3, [r7, #31]
 						estadoActual = CARACTER_VALIDO_1;
  80004a8:	2301      	movs	r3, #1
@@ -606,7 +606,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 				break;
  80004ba:	e094      	b.n	80005e6 <ProcessRxMsg+0x1aa>
 			if (Cola_RetirarDatoCola (colaRx,&dato) != 0x00){
- 80004bc:	f107 0313 	add.w	r3, r7, #19
+ 80004bc:	f107 0317 	add.w	r3, r7, #23
  80004c0:	4619      	mov	r1, r3
  80004c2:	6878      	ldr	r0, [r7, #4]
  80004c4:	f000 f956 	bl	8000774 <Cola_RetirarDatoCola>
@@ -617,12 +617,12 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
  80004d0:	f000 fc0a 	bl	8000ce8 <HAL_GetTick>
  80004d4:	6238      	str	r0, [r7, #32]
 				if (dato == 0x0D) {
- 80004d6:	7cfb      	ldrb	r3, [r7, #19]
+ 80004d6:	7dfb      	ldrb	r3, [r7, #23]
  80004d8:	2b0d      	cmp	r3, #13
  80004da:	d111      	bne.n	8000500 <ProcessRxMsg+0xc4>
 					if(tiempoRecepcionActual - tiempoRecepcion0 < TMAX){
  80004dc:	6a3a      	ldr	r2, [r7, #32]
- 80004de:	697b      	ldr	r3, [r7, #20]
+ 80004de:	69bb      	ldr	r3, [r7, #24]
  80004e0:	1ad3      	subs	r3, r2, r3
  80004e2:	f5b3 7f7a 	cmp.w	r3, #1000	; 0x3e8
  80004e6:	d202      	bcs.n	80004ee <ProcessRxMsg+0xb2>
@@ -644,19 +644,19 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 			break;
  80004fe:	e074      	b.n	80005ea <ProcessRxMsg+0x1ae>
 				}else if(dato == 1 || dato == 2 || dato == 3 || dato == 'S' || dato == 'O'){
- 8000500:	7cfb      	ldrb	r3, [r7, #19]
+ 8000500:	7dfb      	ldrb	r3, [r7, #23]
  8000502:	2b01      	cmp	r3, #1
  8000504:	d00b      	beq.n	800051e <ProcessRxMsg+0xe2>
- 8000506:	7cfb      	ldrb	r3, [r7, #19]
+ 8000506:	7dfb      	ldrb	r3, [r7, #23]
  8000508:	2b02      	cmp	r3, #2
  800050a:	d008      	beq.n	800051e <ProcessRxMsg+0xe2>
- 800050c:	7cfb      	ldrb	r3, [r7, #19]
+ 800050c:	7dfb      	ldrb	r3, [r7, #23]
  800050e:	2b03      	cmp	r3, #3
  8000510:	d005      	beq.n	800051e <ProcessRxMsg+0xe2>
- 8000512:	7cfb      	ldrb	r3, [r7, #19]
+ 8000512:	7dfb      	ldrb	r3, [r7, #23]
  8000514:	2b53      	cmp	r3, #83	; 0x53
  8000516:	d002      	beq.n	800051e <ProcessRxMsg+0xe2>
- 8000518:	7cfb      	ldrb	r3, [r7, #19]
+ 8000518:	7dfb      	ldrb	r3, [r7, #23]
  800051a:	2b4f      	cmp	r3, #79	; 0x4f
  800051c:	d10b      	bne.n	8000536 <ProcessRxMsg+0xfa>
 					enviarACola(MSG_ERROR,colaTx);
@@ -665,9 +665,9 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
  8000522:	f000 f86d 	bl	8000600 <enviarACola>
 					tiempoRecepcion0 = HAL_GetTick();
  8000526:	f000 fbdf 	bl	8000ce8 <HAL_GetTick>
- 800052a:	6178      	str	r0, [r7, #20]
+ 800052a:	61b8      	str	r0, [r7, #24]
 					instruccion = dato;
- 800052c:	7cfb      	ldrb	r3, [r7, #19]
+ 800052c:	7dfb      	ldrb	r3, [r7, #23]
  800052e:	77fb      	strb	r3, [r7, #31]
 					estadoActual = CARACTER_VALIDO_1;
  8000530:	2301      	movs	r3, #1
@@ -687,7 +687,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 			break;
  8000546:	e050      	b.n	80005ea <ProcessRxMsg+0x1ae>
 			if (Cola_RetirarDatoCola (colaRx, &dato) != 0x00){
- 8000548:	f107 0313 	add.w	r3, r7, #19
+ 8000548:	f107 0317 	add.w	r3, r7, #23
  800054c:	4619      	mov	r1, r3
  800054e:	6878      	ldr	r0, [r7, #4]
  8000550:	f000 f910 	bl	8000774 <Cola_RetirarDatoCola>
@@ -698,12 +698,12 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
  800055a:	f000 fbc5 	bl	8000ce8 <HAL_GetTick>
  800055e:	6238      	str	r0, [r7, #32]
 				if (dato == 0x0A){
- 8000560:	7cfb      	ldrb	r3, [r7, #19]
+ 8000560:	7dfb      	ldrb	r3, [r7, #23]
  8000562:	2b0a      	cmp	r3, #10
  8000564:	d118      	bne.n	8000598 <ProcessRxMsg+0x15c>
 					if(tiempoRecepcionActual - tiempoRecepcion0 < TMAX){
  8000566:	6a3a      	ldr	r2, [r7, #32]
- 8000568:	697b      	ldr	r3, [r7, #20]
+ 8000568:	69bb      	ldr	r3, [r7, #24]
  800056a:	1ad3      	subs	r3, r2, r3
  800056c:	f5b3 7f7a 	cmp.w	r3, #1000	; 0x3e8
  8000570:	d209      	bcs.n	8000586 <ProcessRxMsg+0x14a>
@@ -731,26 +731,26 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
  8000594:	627b      	str	r3, [r7, #36]	; 0x24
  8000596:	e022      	b.n	80005de <ProcessRxMsg+0x1a2>
 				}else if(dato == 1 || dato == 2 || dato == 3 || dato == 'S' || dato == 'O'){
- 8000598:	7cfb      	ldrb	r3, [r7, #19]
+ 8000598:	7dfb      	ldrb	r3, [r7, #23]
  800059a:	2b01      	cmp	r3, #1
  800059c:	d00b      	beq.n	80005b6 <ProcessRxMsg+0x17a>
- 800059e:	7cfb      	ldrb	r3, [r7, #19]
+ 800059e:	7dfb      	ldrb	r3, [r7, #23]
  80005a0:	2b02      	cmp	r3, #2
  80005a2:	d008      	beq.n	80005b6 <ProcessRxMsg+0x17a>
- 80005a4:	7cfb      	ldrb	r3, [r7, #19]
+ 80005a4:	7dfb      	ldrb	r3, [r7, #23]
  80005a6:	2b03      	cmp	r3, #3
  80005a8:	d005      	beq.n	80005b6 <ProcessRxMsg+0x17a>
- 80005aa:	7cfb      	ldrb	r3, [r7, #19]
+ 80005aa:	7dfb      	ldrb	r3, [r7, #23]
  80005ac:	2b53      	cmp	r3, #83	; 0x53
  80005ae:	d002      	beq.n	80005b6 <ProcessRxMsg+0x17a>
- 80005b0:	7cfb      	ldrb	r3, [r7, #19]
+ 80005b0:	7dfb      	ldrb	r3, [r7, #23]
  80005b2:	2b4f      	cmp	r3, #79	; 0x4f
  80005b4:	d10b      	bne.n	80005ce <ProcessRxMsg+0x192>
 					enviarACola(MSG_ERROR,colaTx);
  80005b6:	6839      	ldr	r1, [r7, #0]
  80005b8:	480e      	ldr	r0, [pc, #56]	; (80005f4 <ProcessRxMsg+0x1b8>)
  80005ba:	f000 f821 	bl	8000600 <enviarACola>
-					tiempoRecepcion1 = HAL_GetTick();
+					tiempoRecepcion0 = HAL_GetTick();
  80005be:	f000 fb93 	bl	8000ce8 <HAL_GetTick>
  80005c2:	61b8      	str	r0, [r7, #24]
 					instruccion = 0;
