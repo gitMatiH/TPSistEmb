@@ -30,5 +30,7 @@ void CountingHandler(uint16_t *pulseCount){
 	byte = (uint8_t)((uint16_t)*pulseCount>>8);
 	enviarACola(&byte,&cola_tx);
 
+	flagPulso = 0;
+
 }
 

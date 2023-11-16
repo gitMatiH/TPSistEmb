@@ -29,23 +29,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  12 .comment      00000043  00000000  00000000  00020039  2**0
                   CONTENTS, READONLY
- 13 .debug_info   00006ddc  00000000  00000000  0002007c  2**0
+ 13 .debug_info   00006dd3  00000000  00000000  0002007c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00001cc2  00000000  00000000  00026e58  2**0
+ 14 .debug_abbrev 00001c93  00000000  00000000  00026e4f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00000790  00000000  00000000  00028b20  2**3
+ 15 .debug_aranges 00000790  00000000  00000000  00028ae8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 000005ae  00000000  00000000  000292b0  2**0
+ 16 .debug_rnglists 000005ae  00000000  00000000  00029278  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00017450  00000000  00000000  0002985e  2**0
+ 17 .debug_macro  00017450  00000000  00000000  00029826  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0000a2f8  00000000  00000000  00040cae  2**0
+ 18 .debug_line   0000a2f8  00000000  00000000  00040c76  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    00081895  00000000  00000000  0004afa6  2**0
+ 19 .debug_str    00081895  00000000  00000000  0004af6e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  00001c4c  00000000  00000000  000cc83c  2**2
+ 20 .debug_frame  00001c4c  00000000  00000000  000cc804  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000004c  00000000  00000000  000ce488  2**0
+ 21 .debug_line_str 0000004c  00000000  00000000  000ce450  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -980,7 +980,7 @@ void enviarACola(char* cadena, Cola_BaseStructTypedef* colaTx){
  800071e:	466b      	mov	r3, sp
  8000720:	3300      	adds	r3, #0
  8000722:	60bb      	str	r3, [r7, #8]
-	strncpy(bytes,cadena, longitud);	// la cadena es descompuesta en bytes
+	strncpy((char*)bytes,cadena, longitud);	// la cadena es descompuesta en bytes
  8000724:	693b      	ldr	r3, [r7, #16]
  8000726:	461a      	mov	r2, r3
  8000728:	6879      	ldr	r1, [r7, #4]
