@@ -29,7 +29,8 @@ typedef enum{
 	APAGADO_LEDS = 3
 }estado_leds;
 
-
+#define LED_ESTADO_ACTIVO GPIO_PIN_RESET
+#define LED_ESTADO_INACTIVO GPIO_PIN_SET
 
 extern void LedHandler(uint8_t* instruccion_ok);
 

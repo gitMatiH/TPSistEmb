@@ -5,6 +5,8 @@
  *      Author: Matias
  */
 
+
+
 #include "LedHandler.h"
 
 #define MAX_TIME_MS (uint32_t)125
@@ -30,10 +32,12 @@ void LedSequence_init(void);
 
 
 void LedHandler(uint8_t* instruccion_ok){
+	/*
 	if(GetFlag()==0)
 	{
 		return;
 	}
+	*/
 	switch(*instruccion_ok){
 
 	case cmd_led1:
@@ -79,9 +83,9 @@ void LedHandler(uint8_t* instruccion_ok){
 		// ya no hace falta
 		//*flagSecuencia = 0;// es reemplazado por setflag
 		SetFlag(0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, LED_ESTADO_INACTIVO);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, LED_ESTADO_INACTIVO);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, LED_ESTADO_INACTIVO);
 		*instruccion_ok = 0;
 		break;
 
@@ -98,9 +102,9 @@ void LedSequence_init(void){
 
 	tiempo_inicial = HAL_GetTick();
 
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, LED_ESTADO_INACTIVO);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, LED_ESTADO_INACTIVO);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, LED_ESTADO_INACTIVO);
 
 	estadoLeds = PRENDIDO_LED1;
 
@@ -116,7 +120,7 @@ void LedSequence(void){
 	switch (estadoLeds){
 
 	case PRENDIDO_LED1:
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, LED_ESTADO_ACTIVO);
 
 		if(t_actual - tiempo_inicial > MAX_TIME_MS){
 			tiempo_inicial = t_actual;
@@ -125,7 +129,7 @@ void LedSequence(void){
 		break;
 
 	case PRENDIDO_LED2:
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, LED_ESTADO_ACTIVO);
 
 		if(t_actual - tiempo_inicial > MAX_TIME_MS){
 			tiempo_inicial = t_actual;
@@ -134,7 +138,7 @@ void LedSequence(void){
 		break;
 
 	case PRENDIDO_LED3:
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, LED_ESTADO_ACTIVO);
 		if(t_actual - tiempo_inicial > MAX_TIME_MS){
 			tiempo_inicial = t_actual;
 			estadoLeds = APAGADO_LEDS;
@@ -142,9 +146,9 @@ void LedSequence(void){
 		break;
 
 	case APAGADO_LEDS:
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, LED_ESTADO_INACTIVO);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, LED_ESTADO_INACTIVO);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, LED_ESTADO_INACTIVO);
 
 		if(t_actual - tiempo_inicial > MAX_TIME_MS){
 			tiempo_inicial = t_actual;
