@@ -5,8 +5,10 @@
  *      Author: Matias
  */
 
-#include "main.h"
 #include "SendData.h"
+
+TColaDato_Typedef buffer_tx[TX_COLA_MAX_BUFFER];
+Cola_BaseStructTypedef cola_tx;
 
 
 void SendData(UART_HandleTypeDef * huart, Cola_BaseStructTypedef * colaTx){
@@ -15,10 +17,23 @@ void SendData(UART_HandleTypeDef * huart, Cola_BaseStructTypedef * colaTx){
 	HAL_StatusTypeDef estados;
 
 	while ( Cola_RetirarDatoCola(colaTx, &dato) != 0x00){
-		// esto es bloqueante usar IT, tamanio cola 10
-		estados = HAL_UART_Transmit(huart, &dato, 1, 10);
-		//usar este
-		estados = HAL_UART_Transmit_IT(huart, &dato, 1, 10);
+		estados = HAL_UART_Transmit_IT(huart, &dato, 1);
 	}
 }
 
+//pasar esta funcion a send data, poner aca el include senddata.c (.h)
+//poner en senddata la cola de tx y el buffer (perteneciente a la cola)
+
+
+void enviarACola(char* cadena, Cola_BaseStructTypedef* colaTx){
+//encapsular en enviarACola(MSG_ERROR,cola_tx);
+//tal vez que sea bloqueante (que no lo pueda interrumpir otro proceso de llenado de cola)
+	int i;
+	int longitud = strlen(cadena);
+	unsigned char bytes[longitud]; // Arreglo de bytes (8 bits cada uno)
+	strncpy((char *)bytes, cadena, longitud);	// la cadena es descompuesta en bytes
+												// y metida al array "bytes"
+	for (i = 0; i<longitud; i++){
+		Cola_AgregarDatoCola (colaTx, bytes[i]);
+	}
+}

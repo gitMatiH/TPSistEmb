@@ -5,100 +5,123 @@
  *      Author: Matias
  */
 
-//#include "main.h"
 #include "LedHandler.h"
 
-
 #define MAX_TIME_MS (uint32_t)125
-/* no lo entendí
-void LedHandler_Init(led_typedef * ledx, uint8_t num_led)
+
+uint32_t tiempo_inicial;
+//bool primeraVez; no hace falta por el ledsequence_init
+
+estado_leds estadoLeds;
+
+uint8_t flag;
+
+void SetFlag(uint8_t value)
 {
-	//led_typedef led[3];
- 	//led[num_led].GPIOx = ledx->GPIOx;
- 	//led[num_led].Pin = ledx->Pin;
+	flag = value;
 }
-*/
 
-void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez){
+uint8_t GetFlag(void)
+{
+	return flag;
+}
+
+
+void LedSequence_init();
+
+
+void LedHandler(uint8_t* instruccion_ok/*, bool* flagTriggerSecuencia*/){
 	if(GetFlag()==0)
-
 	//if (*instruccion_ack == 0)
 	{
 		return;
 	}
-	switch(*instruccion_ack){
+	switch(*instruccion_ok){
 
 	case cmd_led1:
 		//cambiar estado led 1
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_13);
-	    *instruccion_ack = 0;
+	    *instruccion_ok = 0;
 		break;
 
 	case cmd_led2:
 		//cambiar estado led 2
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
-		*instruccion_ack = 0;
+		*instruccion_ok = 0;
 		break;
 
 	case cmd_led3:
 		//cambiar estado led 3
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_15);
-		*instruccion_ack = 0;
+		*instruccion_ok = 0;
 		break;
 
 	case cmd_Secuencia:
-		if (*flagSecuencia == 0){
-			*primeraVez = 1;
-			*flagSecuencia = 1;
+		if (GetFlag()==0){
+			//*primeraVez = 1;
+			//bool primeraVez;	// capaz nos lo podemos ahorrar... no hace falta por el ledsequence_init
+			//tiempo_inicial = HAL_GetTick();	//reemplaza a toda la estructura de tiempo inic asoc a flagprimeravez
+			// va en LedSequence_init()
+			//puedo usar ese para leer el tiempo inicial "seed
+			LedSequence_init();
+			//*flagSecuencia = 1;
+			SetFlag(1);
 			//puedo usar ese para leer el tiempo inicial "seed
 		}else{
-			*primeraVez = 0;//ESTE ES IMPORTANTE, PARA CUANDO RETORNE LA SECUENCIA SEGUN FLAG
-			*flagSecuencia = 0;
+			//*primeraVez = 0;//ESTE ES IMPORTANTE, PARA CUANDO RETORNE LA SECUENCIA SEGUN FLAG
+			//ya no hace falta apagar primera vez pq ya no existe
+			//*flagSecuencia = 0;
+			SetFlag(0);
 		}
-		*instruccion_ack = 0;
+		*instruccion_ok = 0;
 		break;
 
 	case cmd_Apagado:
-		*primeraVez = 0;
-		*flagSecuencia = 0;//??
+		//*primeraVez = 0;
+		// ya no hace falta
+		//*flagSecuencia = 0;// es reemplazado por setflag
+		SetFlag(0);
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
-		*instruccion_ack = 0;
+		*instruccion_ok = 0;
 		break;
 
 	default:
-		// apagar todos los leds
-		*instruccion_ack = 0
+		// apagar todos los leds??? no, es para agarrar una instruccion no indizada
+		*instruccion_ok = 0;
 		break;
 
 	}
 
 }
 
+void LedSequence_init(void){
 
-void LedSequence(int * pEstadoLeds, bool* primeraVez){
+	tiempo_inicial = HAL_GetTick();
 
-	estado_leds estadoLeds = *pEstadoLeds;
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
+
+	estadoLeds = PRENDIDO_LED1;
+
+	return;
+}
+
+void LedSequence(void){
+
 	uint32_t t_actual;
-	static uint32_t t_evento;
 
-	if (*primeraVez == 1){
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
-		estadoLeds = PRENDIDO_LED1;
-		t_evento = HAL_GetTick();
-		t_actual = t_evento;
-	}else{t_actual = HAL_GetTick();}
+	t_actual = HAL_GetTick();
 
 	switch (estadoLeds){
 
 	case PRENDIDO_LED1:
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
 
-		if(t_actual - t_evento > MAX_TIME_MS){
-			t_evento = t_actual;
+		if(t_actual - tiempo_inicial > MAX_TIME_MS){
+			tiempo_inicial = t_actual;
 			estadoLeds = PRENDIDO_LED2;
 		}
 		break;
@@ -106,16 +129,16 @@ void LedSequence(int * pEstadoLeds, bool* primeraVez){
 	case PRENDIDO_LED2:
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
 
-		if(t_actual - t_evento > MAX_TIME_MS){
-			t_evento = t_actual;
+		if(t_actual - tiempo_inicial > MAX_TIME_MS){
+			tiempo_inicial = t_actual;
 			estadoLeds = PRENDIDO_LED3;
 		}
 		break;
 
 	case PRENDIDO_LED3:
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
-		if(t_actual - t_evento > MAX_TIME_MS){
-			t_evento = t_actual;
+		if(t_actual - tiempo_inicial > MAX_TIME_MS){
+			tiempo_inicial = t_actual;
 			estadoLeds = APAGADO_LEDS;
 		}
 		break;
@@ -125,13 +148,13 @@ void LedSequence(int * pEstadoLeds, bool* primeraVez){
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
 
-		if(t_actual - t_evento > MAX_TIME_MS){
-			t_evento = t_actual;
+		if(t_actual - tiempo_inicial > MAX_TIME_MS){
+			tiempo_inicial = t_actual;
 			estadoLeds = PRENDIDO_LED1;
 		}
 		break;
 	}
-
-	primeraVez = 0;
-
+	//no, no hace falta esto
+	//primera vez hecha
+	//SetFlag(0);
 }

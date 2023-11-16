@@ -8,6 +8,17 @@
 #ifndef SEND_DATA_H_
 #define SEND_DATA_H_
 
+#include "cola.h"
+#include <string.h>
+
+#define TX_COLA_MAX_BUFFER	6
+
+extern TColaDato_Typedef buffer_tx[TX_COLA_MAX_BUFFER];
+extern Cola_BaseStructTypedef cola_tx;
+
+
 extern void SendData(UART_HandleTypeDef * huart, Cola_BaseStructTypedef * colaTx);
+
+extern void enviarACola(char* cadena, Cola_BaseStructTypedef* colaTx);
 
 #endif

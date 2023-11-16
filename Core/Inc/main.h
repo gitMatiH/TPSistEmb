@@ -28,10 +28,8 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
-//#include "common.h"
 #include <stdbool.h>
 #include <string.h>
-
 #include "cola.h"
 #include "ProcessRxMsg.h"
 #include "LedHandler.h"

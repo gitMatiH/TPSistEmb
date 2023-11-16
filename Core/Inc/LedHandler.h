@@ -4,23 +4,15 @@
  *  Created on: Nov 8, 2023
  *      Author: Matias
  */
-#include "main.h"
+//#include "main.h"
 
 #ifndef LED_HANDLER_H_
 #define LED_HANDLER_H_
 
-/*
-#define LED1 0
-#define LED2 1
-#define LED3 2
-*/
-
-/* No lo entendi
-typedef struct estructuraLed{
-	GPIO_TypeDef *GPIOx;
-	uint32_t Pin;
-} led_typedef;
-*/
+#include <stdint.h>
+#include <stdbool.h>
+#include "stm32f1xx_hal.h"
+#include <ProcessRxMsg.h>
 
 typedef enum{
 	cmd_led1='1',
@@ -39,10 +31,13 @@ typedef enum{
 
 
 
-extern void LedHandler(uint8_t* instruccion_ack, bool* flagSecuencia, bool* primeraVez);
+extern void LedHandler(uint8_t* instruccion_ok);
 
 //extern void LedHandler_Init(led_typedef * , uint8_t);
 
-extern void LedSequence(int * pestado_leds,  bool* primeraVez);
+extern void LedSequence(void);
+
+extern void SetFlag(uint8_t value);
+extern uint8_t GetFlag(void);
 
 #endif

@@ -6,8 +6,8 @@
  */
 
 #include "CountingHandler.h"
-#include "SendData.h"
 
+/*
 void CountingHandler(uint16_t* pulseCount, uint16_t* contador, UART_HandleTypeDef * huart, Cola_BaseStructTypedef * colaTx){
 
 	int i, pc;
@@ -24,3 +24,4 @@ void CountingHandler(uint16_t* pulseCount, uint16_t* contador, UART_HandleTypeDe
 	}
 
 }
+*/

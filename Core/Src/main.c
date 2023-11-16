@@ -31,7 +31,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define MAX_BUFFER	2000
+#define MAX_BUFFER	10
 #define MENSAJE_BIENVENIDA "hola!!! Inicializando...\n"
 /* USER CODE END PD */
 
@@ -44,21 +44,19 @@
 UART_HandleTypeDef huart1;
 uint8_t rx_data;
 
-uint8_t instruccion_ack = 0;
+uint8_t instruccion_ok = 0;
 
-bool flagSecuencia = 0;
+//bool flagTriggerSecuencia = 0;
 
 
 
-TColaDato_Typedef buffer_tx[MAX_BUFFER];
-Cola_BaseStructTypedef cola_tx;
+
 
 
 uint32_t milisegundosDebounce = 0;
 uint32_t milisegundosActuales = 0;
 
-int estadoLeds;
-bool primeraVez = 1;
+
 
 uint16_t pulseCount = 0;
 
@@ -87,7 +85,6 @@ void PulseCountBuff_init(int PulseCountBuff[100]);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	uint16_t contador = 0;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -122,16 +119,16 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  ProcessRxMsg(&huart1, &rx_data, &cola_tx, &instruccion_ack);
+	  ProcessRxMsg(&huart1, &rx_data, &cola_tx, &instruccion_ok);
 
-	  LedHandler(&instruccion_ack, &flagSecuencia, &primeraVez);	//hace falta pasarle & a una bandera global?
-	  if (flagSecuencia == 1){
-		  LedSequence(&estadoLeds, &primeraVez);
+	  LedHandler(&instruccion_ok);
+	  if (GetFlag()==1){
+		  LedSequence();
 	  }
 
 	  SendData(&huart1, &cola_tx);
 
-	  CountingHandler(&pulseCount, &contador, &huart1, &cola_tx);
+	  //CountingHandler(&pulseCount, &contador, &huart1, &cola_tx);
 
 
     /* USER CODE END WHILE */

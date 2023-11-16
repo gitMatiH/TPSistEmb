@@ -1,2 +1,5 @@
-../Core/Src/LedHandler.c:22:6:LedHandler	24	static
-../Core/Src/LedHandler.c:70:6:LedSequence	24	static
+../Core/Src/LedHandler.c:19:6:SetFlag	16	static
+../Core/Src/LedHandler.c:24:9:GetFlag	4	static
+../Core/Src/LedHandler.c:33:6:LedHandler	16	static
+../Core/Src/LedHandler.c:99:6:LedSequence_init	8	static
+../Core/Src/LedHandler.c:112:6:LedSequence	16	static
