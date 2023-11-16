@@ -46,19 +46,12 @@ uint8_t rx_data;
 
 uint8_t instruccion_ok = 0;
 
-//bool flagTriggerSecuencia = 0;
-
-
-
-
-
 
 uint32_t milisegundosDebounce = 0;
 uint32_t milisegundosActuales = 0;
 
-
-
-uint16_t pulseCount = 0;
+uint16_t pulseCount;
+bool flagPulso = 1;
 
 /* USER CODE BEGIN PV */
 
@@ -110,6 +103,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   ProcessRxMsg_Init();
+  CountingHandler_init(&pulseCount, &flagPulso);
   HAL_UART_Receive_IT(&huart1, &rx_data, 1);
   HAL_UART_Transmit(&huart1, (uint8_t *)MENSAJE_BIENVENIDA, strlen(MENSAJE_BIENVENIDA), 1000);
 
@@ -128,7 +122,7 @@ int main(void)
 
 	  SendData(&huart1, &cola_tx);
 
-	  //CountingHandler(&pulseCount, &contador, &huart1, &cola_tx);
+	  CountingHandler(&pulseCount);
 
 
     /* USER CODE END WHILE */
@@ -286,7 +280,6 @@ void assert_failed(uint8_t *file, uint32_t line)
   * @retval None
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-//todo buffer de entrada
 {
   milisegundosActuales = HAL_GetTick();
   if (GPIO_Pin == GPIO_PIN_1 && (milisegundosActuales - milisegundosDebounce > 200))
@@ -294,6 +287,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	pulseCount = pulseCount +1;
     milisegundosDebounce = milisegundosActuales;
   }
+
+  flagPulso = 1;
 }
 
 
@@ -305,6 +300,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
+
 	TColaDato_Typedef dato;
 	dato = rx_data;
 	Cola_AgregarDatoCola (&cola_rx, dato);

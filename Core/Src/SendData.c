@@ -31,7 +31,7 @@ void enviarACola(char* cadena, Cola_BaseStructTypedef* colaTx){
 	int i;
 	int longitud = strlen(cadena);
 	unsigned char bytes[longitud]; // Arreglo de bytes (8 bits cada uno)
-	strncpy((char *)bytes, cadena, longitud);	// la cadena es descompuesta en bytes
+	strncpy(bytes,cadena, longitud);	// la cadena es descompuesta en bytes
 												// y metida al array "bytes"
 	for (i = 0; i<longitud; i++){
 		Cola_AgregarDatoCola (colaTx, bytes[i]);

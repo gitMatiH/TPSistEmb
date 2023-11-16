@@ -10,8 +10,10 @@
 #define COUNTINGHANDLER_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "SendData.h"
 
-void CountingHandler(uint16_t* pulseCount, uint16_t* contador, UART_HandleTypeDef * huart, Cola_BaseStructTypedef * colaTx);
+
+void CountingHandler(uint16_t *pulseCount);
 
 #endif

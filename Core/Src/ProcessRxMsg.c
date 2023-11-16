@@ -8,21 +8,8 @@ typedef enum{
 	CARACTER_VALIDO_2 = 2,
 }enum_proceso;
 
-//alternativa a static
 enum_proceso estadoActual;
-/*
-uint8_t flag;
 
-void SetFlag(uint8_t value)
-{
-	flag = value;
-}
-
-uint8_t GetFlag(void)
-{
-	return flag;
-}
-*/
 TColaDato_Typedef buffer_rx[RX_COLA_MAX_BUFFER];
 Cola_BaseStructTypedef cola_rx;
 
@@ -37,13 +24,6 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 
 	uint8_t dato;
 	uint32_t tiempoRecepcionActual, tiempoRecepcion0;
-
-
-
-	// recepcionDatosFlag
-	// maquina de estado:
-	// en realidad desacolar(cola) = caracter
-	// estadoActual depende de caracter
 
 	switch(estadoActual){
 	case OCIOSO:
