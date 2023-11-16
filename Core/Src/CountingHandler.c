@@ -14,7 +14,7 @@ void CountingHandler_init(uint16_t *pulseCount, bool *flagPulso){
 	*flagPulso = 0;
 }
 
-void CountingHandler(uint16_t *pulseCount){
+void CountingHandler(uint16_t *pulseCount, bool *flagPulso){
 
 	unsigned char byte;
 

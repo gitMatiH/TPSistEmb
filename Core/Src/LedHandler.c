@@ -10,7 +10,6 @@
 #define MAX_TIME_MS (uint32_t)125
 
 uint32_t tiempo_inicial;
-//bool primeraVez; no hace falta por el ledsequence_init
 
 estado_leds estadoLeds;
 
@@ -27,12 +26,11 @@ uint8_t GetFlag(void)
 }
 
 
-void LedSequence_init();
+void LedSequence_init(void);
 
 
-void LedHandler(uint8_t* instruccion_ok/*, bool* flagTriggerSecuencia*/){
+void LedHandler(uint8_t* instruccion_ok){
 	if(GetFlag()==0)
-	//if (*instruccion_ack == 0)
 	{
 		return;
 	}

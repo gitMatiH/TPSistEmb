@@ -51,7 +51,7 @@ uint32_t milisegundosDebounce = 0;
 uint32_t milisegundosActuales = 0;
 
 uint16_t pulseCount;
-bool flagPulso = 1;
+bool flagPulso;
 
 /* USER CODE BEGIN PV */
 
@@ -122,8 +122,9 @@ int main(void)
 
 	  SendData(&huart1, &cola_tx);
 
-	  CountingHandler(&pulseCount);
-
+	  if (flagPulso == 1){
+		  CountingHandler(&pulseCount, &flagPulso);
+	  }
 
     /* USER CODE END WHILE */
 

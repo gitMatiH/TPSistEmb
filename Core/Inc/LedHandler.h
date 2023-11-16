@@ -33,8 +33,6 @@ typedef enum{
 
 extern void LedHandler(uint8_t* instruccion_ok);
 
-//extern void LedHandler_Init(led_typedef * , uint8_t);
-
 extern void LedSequence(void);
 
 extern void SetFlag(uint8_t value);
