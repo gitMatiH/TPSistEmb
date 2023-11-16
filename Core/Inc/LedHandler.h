@@ -35,6 +35,8 @@ extern void LedHandler(uint8_t* instruccion_ok);
 
 extern void LedSequence(void);
 
+extern void LedSequence_init(void);
+
 extern void SetFlag(uint8_t value);
 extern uint8_t GetFlag(void);
 

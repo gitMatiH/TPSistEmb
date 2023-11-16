@@ -103,6 +103,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   ProcessRxMsg_Init();
+  LedSequence_init();
   CountingHandler_init(&pulseCount, &flagPulso);
   HAL_UART_Receive_IT(&huart1, &rx_data, 1);
   HAL_UART_Transmit(&huart1, (uint8_t *)MENSAJE_BIENVENIDA, strlen(MENSAJE_BIENVENIDA), 1000);
