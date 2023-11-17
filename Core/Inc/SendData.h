@@ -11,7 +11,7 @@
 #include "cola.h"
 #include <string.h>
 
-#define TX_COLA_MAX_BUFFER	6
+#define TX_COLA_MAX_BUFFER	20
 
 extern TColaDato_Typedef buffer_tx[TX_COLA_MAX_BUFFER];
 extern Cola_BaseStructTypedef cola_tx;

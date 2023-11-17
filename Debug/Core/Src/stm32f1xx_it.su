@@ -9,3 +9,4 @@
 ../Core/Src/stm32f1xx_it.c:183:6:SysTick_Handler	8	static
 ../Core/Src/stm32f1xx_it.c:204:6:RCC_IRQHandler	4	static
 ../Core/Src/stm32f1xx_it.c:217:6:USART1_IRQHandler	8	static
+../Core/Src/stm32f1xx_it.c:233:6:EXTI1_IRQHandler	8	static

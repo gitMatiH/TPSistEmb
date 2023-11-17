@@ -112,6 +112,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  instruccion_ok = 0;
+ // while (1)
+	//  ProcessRxMsg(&huart1, &rx_data, &cola_tx, &instruccion_ok);
   while (1)
   {
 	  ProcessRxMsg(&huart1, &rx_data, &cola_tx, &instruccion_ok);
@@ -224,8 +227,8 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : PB1 */
   GPIO_InitStruct.Pin = GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB13 PB14 PB15 */
@@ -236,6 +239,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI1_IRQn);
 //  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
 //  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
 //  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
@@ -287,14 +294,15 @@ void assert_failed(uint8_t *file, uint32_t line)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
+
   milisegundosActuales = HAL_GetTick();
   if (GPIO_Pin == GPIO_PIN_1 && (milisegundosActuales - milisegundosDebounce > 200))
   {
 	pulseCount = pulseCount +1;
+	flagPulso = 1;
     milisegundosDebounce = milisegundosActuales;
   }
 
-  flagPulso = 1;
 }
 
 

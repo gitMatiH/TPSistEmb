@@ -30,7 +30,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 
 		if (Cola_RetirarDatoCola (&cola_rx,&dato) != 0x00){
 			//dato esperado
-			if (dato == 1 || dato == 2 || dato == 3 || dato == 'S' || dato == 'O'){
+			if (dato == '1' || dato == '2' || dato == '3' || dato == 'S' || dato == 'O'){
 				tiempoRecepcion0 = HAL_GetTick();
 				*instruccion_ok = dato;
 				estadoActual = CARACTER_VALIDO_1;
@@ -90,7 +90,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 					estadoActual = OCIOSO;
 				}
 			//dato no esperado pero valido para secuencia
-			}else if(dato == 1 || dato == 2 || dato == 3 || dato == 'S' || dato == 'O'){
+			}else if(dato == '1' || dato == 2 || dato == 3 || dato == 'S' || dato == 'O'){
 				enviarACola(MSG_ERROR,colaTx);
 				tiempoRecepcion0 = HAL_GetTick();	//cambios
 				instruccion_ok = 0;
@@ -105,3 +105,7 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 	}
 }
 
+/*$12340D0A
+ * $SizePAyload
+ * $GPRMC,12.3,fggggg,,*ODOA
+ * $>GPRMC,,,,*/
