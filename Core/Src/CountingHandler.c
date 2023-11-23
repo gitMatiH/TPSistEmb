@@ -25,10 +25,11 @@ void CountingHandler(uint16_t *pulseCount, bool *flagPulso){
 	*
 	*/ // Interprete mal!!!!
 
-	byte = (uint8_t)*pulseCount;
+	byte = (uint8_t) ((uint16_t)(*pulseCount)>>8);	// 00 -> 01
 	Cola_AgregarDatoCola (&cola_tx, byte);
-	byte = (uint8_t) ((uint16_t)(*pulseCount)>>8);
+	byte = (uint8_t)*pulseCount;	//	0A-> FF -> 00
 	Cola_AgregarDatoCola (&cola_tx, byte);
+
 
 	*flagPulso = 0;
 

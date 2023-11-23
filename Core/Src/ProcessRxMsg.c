@@ -52,6 +52,8 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 
 	case CARACTER_VALIDO_1:
 
+		//chequear y medir timeout
+
 		if (Cola_RetirarDatoCola (&cola_rx,&dato) != COLA_COLA_VACIA){
 
 			//dato esperado

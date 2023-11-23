@@ -127,26 +127,27 @@ void CountingHandler(uint16_t *pulseCount, bool *flagPulso){
 	*
 	*/ // Interprete mal!!!!
 
-	byte = (uint8_t)*pulseCount;
+	byte = (uint8_t) ((uint16_t)(*pulseCount)>>8);	// 00 -> 01
  8000186:	687b      	ldr	r3, [r7, #4]
  8000188:	881b      	ldrh	r3, [r3, #0]
- 800018a:	73fb      	strb	r3, [r7, #15]
+ 800018a:	0a1b      	lsrs	r3, r3, #8
+ 800018c:	b29b      	uxth	r3, r3
+ 800018e:	73fb      	strb	r3, [r7, #15]
 	Cola_AgregarDatoCola (&cola_tx, byte);
- 800018c:	7bfb      	ldrb	r3, [r7, #15]
- 800018e:	4619      	mov	r1, r3
- 8000190:	4809      	ldr	r0, [pc, #36]	; (80001b8 <CountingHandler+0x3c>)
- 8000192:	f000 fabf 	bl	8000714 <Cola_AgregarDatoCola>
-	byte = (uint8_t) ((uint16_t)(*pulseCount)>>8);
- 8000196:	687b      	ldr	r3, [r7, #4]
- 8000198:	881b      	ldrh	r3, [r3, #0]
- 800019a:	0a1b      	lsrs	r3, r3, #8
- 800019c:	b29b      	uxth	r3, r3
+ 8000190:	7bfb      	ldrb	r3, [r7, #15]
+ 8000192:	4619      	mov	r1, r3
+ 8000194:	4808      	ldr	r0, [pc, #32]	; (80001b8 <CountingHandler+0x3c>)
+ 8000196:	f000 fabd 	bl	8000714 <Cola_AgregarDatoCola>
+	byte = (uint8_t)*pulseCount;	//	0A-> FF -> 00
+ 800019a:	687b      	ldr	r3, [r7, #4]
+ 800019c:	881b      	ldrh	r3, [r3, #0]
  800019e:	73fb      	strb	r3, [r7, #15]
 	Cola_AgregarDatoCola (&cola_tx, byte);
  80001a0:	7bfb      	ldrb	r3, [r7, #15]
  80001a2:	4619      	mov	r1, r3
  80001a4:	4804      	ldr	r0, [pc, #16]	; (80001b8 <CountingHandler+0x3c>)
  80001a6:	f000 fab5 	bl	8000714 <Cola_AgregarDatoCola>
+
 
 	*flagPulso = 0;
  80001aa:	683b      	ldr	r3, [r7, #0]
