@@ -39,9 +39,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_macro  00017474  00000000  00000000  00029ab3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0000a2a3  00000000  00000000  00040f27  2**0
+ 18 .debug_line   0000a2a1  00000000  00000000  00040f27  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000818d1  00000000  00000000  0004b1ca  2**0
+ 19 .debug_str    000818d1  00000000  00000000  0004b1c8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  20 .debug_frame  00001c34  00000000  00000000  000cca9c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -258,7 +258,7 @@ void LedHandler(uint8_t* instruccion_ok){
  8000290:	08000329 	.word	0x08000329
  8000294:	08000329 	.word	0x08000329
  8000298:	080002d3 	.word	0x080002d3
-	case idle:
+		//estado ocioso
 
 		break;
 
@@ -347,11 +347,10 @@ void LedHandler(uint8_t* instruccion_ok){
  8000324:	701a      	strb	r2, [r3, #0]
 		break;
  8000326:	e000      	b.n	800032a <LedHandler+0x13a>
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, LED_ESTADO_INACTIVO);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, LED_ESTADO_INACTIVO);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, LED_ESTADO_INACTIVO);
-		*instruccion_ok = 0;
-		*/
+
+	default:
+		//es para agarrar una instruccion no indizada
+		//*instruccion_ok = 0;
 		break;
  8000328:	bf00      	nop
 
@@ -1221,11 +1220,6 @@ int main(void)
 	  LedHandler(&instruccion_ok);
  800082c:	4812      	ldr	r0, [pc, #72]	; (8000878 <main+0xa4>)
  800082e:	f7ff fcdf 	bl	80001f0 <LedHandler>
-	  /*
-	  if (instruccion_ok != 0){
-		  LedHandler(&instruccion_ok);
-	  }
-	  */
 	  if (GetFlag()==1){
  8000832:	f7ff fcd3 	bl	80001dc <GetFlag>
  8000836:	4603      	mov	r3, r0

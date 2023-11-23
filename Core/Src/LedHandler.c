@@ -75,7 +75,7 @@ void LedHandler(uint8_t* instruccion_ok){
 
 	default:
 		//es para agarrar una instruccion no indizada
-
+		//*instruccion_ok = 0; ¿Por qué introduce estados extraños?
 		break;
 
 	}

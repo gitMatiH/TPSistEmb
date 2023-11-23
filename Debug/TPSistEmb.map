@@ -3572,23 +3572,23 @@ LOAD M:/STM32/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.
  .debug_macro   0x0000000000017145      0x1a0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
  .debug_macro   0x00000000000172e5      0x18f ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
 
-.debug_line     0x0000000000000000     0xa2a3
+.debug_line     0x0000000000000000     0xa2a1
  .debug_line    0x0000000000000000      0x899 ./Core/Src/CountingHandler.o
- .debug_line    0x0000000000000899      0x7f5 ./Core/Src/LedHandler.o
- .debug_line    0x000000000000108e      0x7e6 ./Core/Src/ProcessRxMsg.o
- .debug_line    0x0000000000001874      0x8ad ./Core/Src/SendData.o
- .debug_line    0x0000000000002121      0x878 ./Core/Src/cola.o
- .debug_line    0x0000000000002999      0x9e1 ./Core/Src/main.o
- .debug_line    0x000000000000337a      0x8f1 ./Core/Src/stm32f1xx_hal_msp.o
- .debug_line    0x0000000000003c6b      0x99d ./Core/Src/stm32f1xx_it.o
- .debug_line    0x0000000000004608      0x756 ./Core/Src/system_stm32f1xx.o
- .debug_line    0x0000000000004d5e       0x79 ./Core/Startup/startup_stm32f103c8tx.o
- .debug_line    0x0000000000004dd7      0x983 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
- .debug_line    0x000000000000575a      0xb6b ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
- .debug_line    0x00000000000062c5      0xddb ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o
- .debug_line    0x00000000000070a0      0xa1a ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
- .debug_line    0x0000000000007aba      0xd8e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
- .debug_line    0x0000000000008848     0x1a5b ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
+ .debug_line    0x0000000000000899      0x7f3 ./Core/Src/LedHandler.o
+ .debug_line    0x000000000000108c      0x7e6 ./Core/Src/ProcessRxMsg.o
+ .debug_line    0x0000000000001872      0x8ad ./Core/Src/SendData.o
+ .debug_line    0x000000000000211f      0x878 ./Core/Src/cola.o
+ .debug_line    0x0000000000002997      0x9e1 ./Core/Src/main.o
+ .debug_line    0x0000000000003378      0x8f1 ./Core/Src/stm32f1xx_hal_msp.o
+ .debug_line    0x0000000000003c69      0x99d ./Core/Src/stm32f1xx_it.o
+ .debug_line    0x0000000000004606      0x756 ./Core/Src/system_stm32f1xx.o
+ .debug_line    0x0000000000004d5c       0x79 ./Core/Startup/startup_stm32f103c8tx.o
+ .debug_line    0x0000000000004dd5      0x983 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+ .debug_line    0x0000000000005758      0xb6b ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+ .debug_line    0x00000000000062c3      0xddb ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o
+ .debug_line    0x000000000000709e      0xa1a ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+ .debug_line    0x0000000000007ab8      0xd8e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+ .debug_line    0x0000000000008846     0x1a5b ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
 
 .debug_str      0x0000000000000000    0x818d1
  .debug_str     0x0000000000000000    0x7f656 ./Core/Src/CountingHandler.o

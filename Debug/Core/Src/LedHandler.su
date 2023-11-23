@@ -1,5 +1,5 @@
 ../Core/Src/LedHandler.c:20:6:SetFlag	16	static
 ../Core/Src/LedHandler.c:25:9:GetFlag	4	static
 ../Core/Src/LedHandler.c:34:6:LedHandler	16	static
-../Core/Src/LedHandler.c:90:6:LedSequence_init	8	static
-../Core/Src/LedHandler.c:103:6:LedSequence	16	static
+../Core/Src/LedHandler.c:85:6:LedSequence_init	8	static
+../Core/Src/LedHandler.c:98:6:LedSequence	16	static
