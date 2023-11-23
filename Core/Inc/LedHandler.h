@@ -15,6 +15,7 @@
 #include <ProcessRxMsg.h>
 
 typedef enum{
+	idle = '0',
 	cmd_led1='1',
 	cmd_led2='2',
 	cmd_led3='3',
