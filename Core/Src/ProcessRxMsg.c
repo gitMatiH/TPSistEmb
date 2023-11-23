@@ -57,16 +57,14 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 			//dato esperado
 			if (dato == CR){
 				tiempoRecepcionActual = HAL_GetTick();
-				if (dato == COLA_COLA_VACIA) {
-					//a tiempo
-					if(tiempoRecepcionActual - tiempoRecepcion0 < TMAX){
-						estadoActual = CARACTER_VALIDO_2;
-					//tarde
-					}else{
-						enviarACola(MSG_TIMEOUT,colaTx);
-						*instruccion_ok = 0;
-						estadoActual = OCIOSO;
-					}
+				//a tiempo
+				if(tiempoRecepcionActual - tiempoRecepcion0 < TMAX){
+					estadoActual = CARACTER_VALIDO_2;
+				//tarde
+				}else{
+					enviarACola(MSG_TIMEOUT,colaTx);
+					*instruccion_ok = 0;
+					estadoActual = OCIOSO;
 				}
 			//dato no esperado inválido
 			}else{
@@ -92,13 +90,13 @@ void ProcessRxMsg(UART_HandleTypeDef * huart1, uint8_t * rx_data, Cola_BaseStruc
 				//tarde
 				}else{
 					enviarACola(MSG_TIMEOUT,colaTx);
-					instruccion_ok = 0;
+					*instruccion_ok = 0;
 					estadoActual = OCIOSO;
 				}
 			//dato no esperado inválido
 			}else{
 				enviarACola(MSG_ERROR,colaTx);
-				instruccion_ok = 0;
+				*instruccion_ok = 0;
 				estadoActual = OCIOSO;
 			}
 		}

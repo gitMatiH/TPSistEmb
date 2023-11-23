@@ -36,6 +36,7 @@ void LedHandler(uint8_t* instruccion_ok){
 	switch(*instruccion_ok){
 
 	case idle:
+		//estado ocioso
 
 		break;
 
@@ -74,11 +75,7 @@ void LedHandler(uint8_t* instruccion_ok){
 
 	default:
 		//es para agarrar una instruccion no indizada
-		SetFlag(0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, LED_ESTADO_INACTIVO);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, LED_ESTADO_INACTIVO);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, LED_ESTADO_INACTIVO);
-		*instruccion_ok = 0;
+
 		break;
 
 	}
