@@ -27,7 +27,7 @@ typedef enum{
 #define MSG_TIMEOUT "Timeout\n"
 #define MSG_OK "OK\n"
 
-#define TMAX (uint32_t)1000000
+#define TMAX (uint32_t)1000
 
 extern void ProcessRxMsg_Init(void);
 
