@@ -12,6 +12,16 @@
 //#include <stdint.h>
 #include <cola.h>
 
+typedef enum{
+	L1 = '1',
+	L2 = '2',
+	L3 = '3',
+	S = 'S',
+	O = 'O',
+	CR = 0x0D,
+	LF = 0x0A
+}comandos;
+
 #define RX_COLA_MAX_BUFFER	6
 #define MSG_ERROR "Error\n"
 #define MSG_TIMEOUT "Timeout\n"

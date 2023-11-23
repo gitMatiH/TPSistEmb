@@ -113,15 +113,18 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   instruccion_ok = 0;
- // while (1)
-	//  ProcessRxMsg(&huart1, &rx_data, &cola_tx, &instruccion_ok);
+
+
   while (1)
   {
 	  ProcessRxMsg(&huart1, &rx_data, &cola_tx, &instruccion_ok);
 
+	  LedHandler(&instruccion_ok);
+	  /*
 	  if (instruccion_ok != 0){
 		  LedHandler(&instruccion_ok);
 	  }
+	  */
 	  if (GetFlag()==1){
 		  LedSequence();
 	  }
